@@ -206,13 +206,13 @@ int main() {
 
 		uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
 		PRINT("%d,%d,%lu\n", 1, i, delta_us);
-        fprintf(f, "%d,%d,%lu\n", 1, i, delta_us);
+		fprintf(f, "%d,%d,%lu\n", 1, i, delta_us);
 //		show(p, i);
 
 		for(thr = 2; thr < 9; thr += 2) {
-            int size = sizeof(int) * i;
-            int *pp = malloc(size);
-            memcpy(pp, p, size);
+			int size = sizeof(int) * i;
+			int *pp = malloc(size);
+			memcpy(pp, p, size);
 			clock_gettime(CLOCK_MONOTONIC_RAW, &start);
 			{
 				parallel_odd_even_sort(thr, p, i);
@@ -221,7 +221,7 @@ int main() {
 
 			uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
 			PRINT("%d,%d,%lu\n", thr, i, delta_us);
-            fprintf(f, "%d,%d,%lu\n", thr, i, delta_us);
+			fprintf(f, "%d,%d,%lu\n", thr, i, delta_us);
 //			show(p, i);
 		}
 
