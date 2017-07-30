@@ -42,7 +42,6 @@ int *generate_data(int size) {
 	return p;
 }
 
-
 /* display the data and/or assert
  */
 void show(int p[], int size) {
@@ -61,6 +60,11 @@ void show(int p[], int size) {
 #endif
 }
 
+/* swap.
+ * @ p: ref. to array
+ * @ i: first arg
+ * @ j: second arg
+ */
 void swap(int *p, int i, int j) {
 	int tmp = p[i];
 	p[i] = p[j];
@@ -72,7 +76,6 @@ void swap(int *p, int i, int j) {
  * @ p: pointer to the data set
  * @ size: size of the data set
  */
-
 void parallel_odd_even_sort(int threads, int *p, int size) {
 	return;
 }
