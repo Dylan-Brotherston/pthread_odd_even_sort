@@ -17,9 +17,6 @@
 #define SHOW
 #endif
 
-#define MAX 1000
-#define ITR 10000
-
 #ifdef SHOW
 #define PRINT printf
 #else
@@ -31,6 +28,9 @@
 #else
 #define CHECK(...)
 #endif
+
+#define MAX 1000
+#define ITR 1000
 
 typedef struct {
     int start;
@@ -122,7 +122,7 @@ void *thread(void *arg) {
         g_swapped = 0;
         swapped = 0;
 
-        for (i = start + 1; i < end - 1; i += 2) {
+        for (i = start + 1; i < end - 1; i += 2) { //odd
             if (arr[i] > arr[i + 1]) {
                 int temp = arr[i];
                 arr[i] = arr[i + 1];
@@ -133,7 +133,7 @@ void *thread(void *arg) {
 
         pthread_barrier_wait(&barrier);
 
-        for (i = start; i < end - 1; i += 2) {
+        for (i = start; i < end - 1; i += 2) { //even
             if (arr[i] > arr[i + 1]) {
                 int temp = arr[i];
                 arr[i] = arr[i + 1];
@@ -207,7 +207,7 @@ int main() {
 		uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
 		PRINT("%d,%d,%lu\n", 1, i, delta_us);
 		fprintf(f, "%d,%d,%lu\n", 1, i, delta_us);
-//		show(p, i);
+		show(p, i);
 
 		for(thr = 2; thr < 9; thr += 2) {
 			int size = sizeof(int) * i;
@@ -222,16 +222,10 @@ int main() {
 			uint64_t delta_us = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec) / 1000;
 			PRINT("%d,%d,%lu\n", thr, i, delta_us);
 			fprintf(f, "%d,%d,%lu\n", thr, i, delta_us);
-//			show(p, i);
+			show(p, i);
 		}
 
-//		PRINT("\n");
-		free(p);
+        free(p);
 	}
 }
-
-// Can we use the same p?
-// should we generate a different p?
-// should be duplication p?
-
 
